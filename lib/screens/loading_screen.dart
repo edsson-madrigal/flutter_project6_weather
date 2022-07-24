@@ -3,7 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project6_weather/services/location.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -36,13 +36,20 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   Future<void> getData() async {
-    Response response = await get(
+    http.Response response = await http.get(
       Uri.parse(
           'https://samples.openweathermap.org/data/2.5/weather?q=London&appid=b1b15e88fa797225412429c1c50c122a1'),
     );
     if (kDebugMode) {
       print(response.body);
       print(response.statusCode);
+    }
+    if (response.statusCode == 200) {
+      String data = response.body;
+    } else {
+      if (kDebugMode) {
+        print(response.statusCode);
+      }
     }
   }
 
