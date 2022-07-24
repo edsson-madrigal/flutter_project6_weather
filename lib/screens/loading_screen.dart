@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project6_weather/services/location.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -25,18 +26,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void getLocation() async {
-    // ignore: unused_local_variable
-    try {
-      LocationPermission permission = await Geolocator.requestPermission();
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.low);
-      if (kDebugMode) {
-        print(position);
-      }
-    } on Exception catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
+    Location location = Location();
+    await location.getCurrentLocation();
+    if (kDebugMode) {
+      print(location.latitude);
+      print(location.latitude);
     }
   }
 
