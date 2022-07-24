@@ -8,8 +8,8 @@ void main() {
 
 void performTasks() {
   task1();
-  task2();
-  task3();
+  String task2Result = task2();
+  task3(task2Result);
 }
 
 void task1() {
@@ -17,15 +17,17 @@ void task1() {
   print('Task 1 complete');
 }
 
-void task2() {
+String task2() {
+  String result = '';
   Duration pause = Duration(seconds: 3);
   Future.delayed(pause, () {
-    String result = 'task 2 data';
+    result = 'task 2 data';
     print('Task 2 complete');
   });
+  return result;
 }
 
-void task3() {
+void task3(String task2Data) {
   String result = 'task 3 data';
   print('Task 3 complete');
 }
