@@ -19,9 +19,10 @@ void task1() {
 
 void task2() {
   Duration pause = Duration(seconds: 3);
-  sleep(pause);
-  String result = 'task 2 data';
-  print('Task 2 complete');
+  Future.delayed(pause, () {
+    String result = 'task 2 data';
+    print('Task 2 complete');
+  });
 }
 
 void task3() {
