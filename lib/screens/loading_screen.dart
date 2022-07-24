@@ -48,12 +48,18 @@ class _LoadingScreenState extends State<LoadingScreen> {
     }
     if (response.statusCode == 200) {
       String data = response.body;
-      var lon = jsonDecode(data)['coord']['lon'];
-      var descr = jsonDecode(data)['weather'][0].description;
+
+      var decodedData = jsonDecode(data);
+
+      // decodedData returns a dynamic type, only if you are sure the data type add it, otherwise use var
+      double temperature = decodedData['main']['temp'];
+      var condition = decodedData['main'][0]['id'];
+      var cityName = decodedData['name'];
 
       if (kDebugMode) {
-        print(lon);
-        print(descr);
+        print(temperature);
+        print(condition);
+        print(cityName);
       }
     } else {
       if (kDebugMode) {
