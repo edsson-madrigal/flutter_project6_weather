@@ -1,5 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unused_local_variable
 
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project6_weather/services/location.dart';
@@ -46,6 +48,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
     }
     if (response.statusCode == 200) {
       String data = response.body;
+      var lon = jsonDecode(data)['coord']['lon'];
+      var descr = jsonDecode(data)['weather'][0].description;
+
+      if (kDebugMode) {
+        print(lon);
+        print(descr);
+      }
     } else {
       if (kDebugMode) {
         print(response.statusCode);
