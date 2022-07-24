@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project6_weather/services/location.dart';
+import 'package:flutter_project6_weather/utilities/constants.dart';
 import 'package:http/http.dart' as http;
 
 class LoadingScreen extends StatefulWidget {
@@ -13,6 +14,9 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  double latitude = 0.0;
+  double longitude = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -31,16 +35,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void getLocation() async {
     Location location = Location();
     await location.getCurrentLocation();
-    if (kDebugMode) {
-      print(location.latitude);
-      print(location.latitude);
-    }
+    latitude = location.latitude!;
+    longitude = location.longitude!;
   }
 
   Future<void> getData() async {
     http.Response response = await http.get(
       Uri.parse(
-          'https://samples.openweathermap.org/data/2.5/weather?q=London&appid=b1b15e88fa797225412429c1c50c122a1'),
+          'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$kApiKey'),
     );
     if (kDebugMode) {
       print(response.body);
@@ -53,7 +55,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
       // decodedData returns a dynamic type, only if you are sure the data type add it, otherwise use var
       double temperature = decodedData['main']['temp'];
-      var condition = decodedData['main'][0]['id'];
+      var condition = decodedData['weather'][0]['id'];
       var cityName = decodedData['name'];
 
       if (kDebugMode) {
