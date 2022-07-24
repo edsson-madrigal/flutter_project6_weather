@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unused_local_variable
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -26,11 +26,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void getLocation() async {
     // ignore: unused_local_variable
-    LocationPermission permission = await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.low);
-    if (kDebugMode) {
-      print(position);
+    try {
+      LocationPermission permission = await Geolocator.requestPermission();
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.low);
+      if (kDebugMode) {
+        print(position);
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
