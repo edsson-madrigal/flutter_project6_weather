@@ -11,6 +11,8 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   void getLocation() async {
+    // ignore: unused_local_variable
+    LocationPermission permission = await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low);
     if (kDebugMode) {
@@ -24,6 +26,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
+            getLocation();
             //Get the current location
           },
           child: Text('Get Location'),
