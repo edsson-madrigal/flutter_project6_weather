@@ -10,6 +10,20 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    if (kDebugMode) {
+      print('me mori');
+    }
+  }
+
   void getLocation() async {
     // ignore: unused_local_variable
     LocationPermission permission = await Geolocator.requestPermission();
@@ -22,16 +36,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            getLocation();
-            //Get the current location
-          },
-          child: Text('Get Location'),
-        ),
-      ),
-    );
+    return Scaffold();
   }
 }
