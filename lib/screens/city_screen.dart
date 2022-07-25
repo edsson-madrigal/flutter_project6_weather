@@ -31,7 +31,9 @@ class _CityScreenState extends State<CityScreen> {
                     backgroundColor:
                         MaterialStateProperty.all(Colors.transparent),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Icon(
                     Icons.arrow_back_ios,
                     size: 50.0,
