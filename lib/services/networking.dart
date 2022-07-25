@@ -6,9 +6,10 @@ import 'dart:convert';
 
 class NetworkHelper {
   final String url;
+  var map = <String, dynamic>{};
   NetworkHelper(this.url);
 
-  Future<void> getData() async {
+  Future<Map> getData() async {
     http.Response response = await http.get(
       Uri.parse(url),
     );
@@ -16,11 +17,12 @@ class NetworkHelper {
     if (response.statusCode == 200) {
       String data = response.body;
 
-      var decodedData = jsonDecode(data);
+      return jsonDecode(data);
     } else {
       if (kDebugMode) {
         print(response.statusCode);
       }
+      return map;
     }
   }
 }
