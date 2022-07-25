@@ -63,7 +63,10 @@ class _LocationScreenState extends State<LocationScreen> {
                       backgroundColor:
                           MaterialStateProperty.all(Colors.transparent),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      var weatherData = await weatherModel.getLocationWeather();
+                      updateUI(weatherData);
+                    },
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,
